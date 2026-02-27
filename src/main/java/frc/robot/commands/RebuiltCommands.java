@@ -39,7 +39,7 @@ public class RebuiltCommands {
 
     public static final ConditionalCommand toggleShoot = new ConditionalCommand(
         stopShoot.andThen(stopSpindexer).andThen(stopTransport),
-        shootFuel.andThen(runSpindexer).andThen(startTransport),
+        shootFuel.andThen(new WaitCommand(1)).andThen(runSpindexer).andThen(startTransport),
         Robot.shooterSubsystem::isShooting
     );
 

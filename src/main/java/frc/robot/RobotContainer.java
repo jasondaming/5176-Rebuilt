@@ -32,7 +32,7 @@ public class RobotContainer
   private final CommandXboxController driverXbox = new CommandXboxController(0);
 
     // Establish a Sendable Chooser that will be able to be sent to the SmartDashboard, allowing selection of desired auto
-  private final SendableChooser<Command> autoChooser;
+  // private final SendableChooser<Command> autoChooser;
   
   // The container for the robot. Contains subsystems, OI devices, and commands.
   
@@ -40,9 +40,9 @@ public class RobotContainer
   
   public RobotContainer()
   {
-    AutoBuilder ab = new AutoBuilder();
+    // AutoBuilder ab = new AutoBuilder();
     //Have the autoChooser pull in all PathPlanner autos as options
-    autoChooser = AutoBuilder.buildAutoChooser();
+    // autoChooser = AutoBuilder.buildAutoChooser();
 
     drivebase.setupPathPlanner();
     configureDriveToPose();
@@ -68,11 +68,11 @@ public class RobotContainer
   Command driveFieldOrientedDirectAngle = drivebase.driveFieldOriented(driveDirectAngle);
   Command driveFieldOrientedAngularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
 
-  public Command getAutonomousCommand()
+ /*  public Command getAutonomousCommand()
   {
     // Pass in the selected auto from the SmartDashboard as our desired autnomous commmand 
     return autoChooser.getSelected();
-  }
+  } */
 
   private void configureDriveToPose() {
 

@@ -48,7 +48,7 @@ public final class Constants
     public static final double SHOOTER_TARGET_VELOCITY_RPM = 3000.0;
 
     // Shooter PID Constants
-    public static final double kP = 0.0001;// Needs Tuning - Proportional Gain
+    public static final double kP = 0.1;// Needs Tuning - Proportional Gain
     public static final double kI = 0.0;
     public static final double kD = 0.0;// Needs Tuning - Derivative Gain
     // public static final double kIz = 0.0; --- IGNORE ---
@@ -111,7 +111,7 @@ public final class Constants
     public static final double kTransportA = 0;
 
 
-    public static final double kTransportP = 0.01;
+    public static final double kTransportP = 0.1;
     public static final double kTransportI = 0;
     public static final double kTransportD = 0;
 
@@ -129,7 +129,7 @@ public final class Constants
     public static final double kSpindexA = 0;
 
 
-    public static final double kSpindexP = 0.01;
+    public static final double kSpindexP = 0.1;
     public static final double kSpindexI = 0;
     public static final double kSpindexD = 0;
 

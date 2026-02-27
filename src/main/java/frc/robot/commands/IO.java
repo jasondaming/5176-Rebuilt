@@ -14,7 +14,8 @@ public class IO {
 
     // public XboxController driverXbox = new XboxController(0); add back????
 
-    public static XboxController driverXbox = new XboxController(1);
+    // Driver Xbox controller. Port 0 is the usual driver station index; change if your controller is on a different port.
+    public static XboxController driverXbox = new XboxController(0);
 
 
     Trigger shootButton = new Trigger(() -> driverXbox.getRightTriggerAxis() > 0.7);//XboxController...RightTrigger
@@ -27,7 +28,7 @@ public class IO {
         // whiletrue buttons here
 
         shootButton.onTrue(RebuiltCommands.toggleShoot);
-        shootButton.onFalse(RebuiltCommands.toggleShoot);
+        // shootButton.onFalse(RebuiltCommands.toggleShoot);
 
         toggleIntakeButton.toggleOnTrue(RebuiltCommands.toggleIntake);
     }
