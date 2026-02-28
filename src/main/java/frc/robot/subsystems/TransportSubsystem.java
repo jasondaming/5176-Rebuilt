@@ -23,16 +23,16 @@ public class TransportSubsystem extends SubsystemBase {
     {
 
       SparkFlexConfig transportConfig = new SparkFlexConfig();
-      FeedForwardConfig transportFeedForwardConfig = new FeedForwardConfig();
+      // FeedForwardConfig transportFeedForwardConfig = new FeedForwardConfig();
 
       transportConfig.idleMode(IdleMode.kBrake);
       transportConfig.voltageCompensation(Constants.TransportConstants.Transport_MOTORS_VOLTAGE);
       transportConfig.smartCurrentLimit(Constants.TransportConstants.Transport_MOTORS_CURRENT_LIMIT);
 
       // transportFeedForwardConfig
-      //                     .kS(Constants.TransportConstants.kTransportS)
-      //                     .kV(Constants.TransportConstants.kTransportV)
-      //                     .kA(Constants.TransportConstants.kTransportA);
+      //                      .kS(Constants.TransportConstants.kTransportS)
+      //                      .kV(Constants.TransportConstants.kTransportV)
+      //                      .kA(Constants.TransportConstants.kTransportA);
 
       transportConfig.closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
@@ -41,7 +41,7 @@ public class TransportSubsystem extends SubsystemBase {
                     Constants.TransportConstants.kTransportI,
                     Constants.TransportConstants.kTransportD);
       ClosedLoopConfig transportClosedLoopConfig = transportConfig.closedLoop;
-              transportClosedLoopConfig.apply(transportFeedForwardConfig);
+              // transportClosedLoopConfig.apply(transportFeedForwardConfig);
               transportConfig.apply(transportClosedLoopConfig);
 
 
@@ -53,6 +53,11 @@ public class TransportSubsystem extends SubsystemBase {
     public void setTransport(double velocityRPM) {
 
       transport.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
+    }
+
+    /** Open-loop percent output control for quick testing (range -1.0 to 1.0) */
+    public void setTransportPercent(double percent) {
+        transport.set(percent);
     }
 
 }

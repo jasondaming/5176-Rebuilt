@@ -23,7 +23,7 @@ public class SpindexerSubsystem extends SubsystemBase {
     public SpindexerSubsystem() {
 
         SparkMaxConfig spindexerConfig  = new SparkMaxConfig();
-        // FeedForwardConfig spindexerFeedForwardConfig = new FeedForwardConfig();
+        FeedForwardConfig spindexerFeedForwardConfig = new FeedForwardConfig();
 
         spindexerConfig.idleMode(IdleMode.kBrake);
         spindexerConfig.smartCurrentLimit(Constants.SpindexerConstants.SPINDEX_MOTORS_CURRENT_LIMIT);
@@ -50,5 +50,10 @@ public class SpindexerSubsystem extends SubsystemBase {
     
     public void runSpindexer(double velocityRPM) {
         spindexer.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
+    }
+
+    /** Open-loop percent output control for quick testing (range -1.0 to 1.0) */
+    public void runSpindexerPercent(double percent) {
+        spindexer.set(percent);
     }
 }

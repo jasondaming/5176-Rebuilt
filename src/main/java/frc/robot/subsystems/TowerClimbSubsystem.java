@@ -31,16 +31,16 @@ public class TowerClimbSubsystem extends SubsystemBase {
     public TowerClimbSubsystem() {
 
         SparkMaxConfig flippersConfig  = new SparkMaxConfig();
-        FeedForwardConfig flippersFeedForwardConfig = new FeedForwardConfig();
+        // FeedForwardConfig flippersFeedForwardConfig = new FeedForwardConfig();
 
         flippersConfig.idleMode(IdleMode.kBrake);
         flippersConfig.smartCurrentLimit(Constants.TowerConstants.FLIPPERS_MOTOR_CURRENT_LIMIT);
         flippersConfig.voltageCompensation(Constants.TowerConstants.FLIPPERS_MOTOR_VOLTAGE);
 
-        flippersFeedForwardConfig
-                          .kS(Constants.TowerConstants.kFlippersS)
-                          .kV(Constants.TowerConstants.kFlippersV)
-                          .kA(Constants.TowerConstants.kFlippersA);
+        // flippersFeedForwardConfig
+        //                   .kS(Constants.TowerConstants.kFlippersS)
+        //                   .kV(Constants.TowerConstants.kFlippersV)
+        //                   .kA(Constants.TowerConstants.kFlippersA);
 
         flippersConfig.closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
@@ -49,7 +49,7 @@ public class TowerClimbSubsystem extends SubsystemBase {
                     Constants.TowerConstants.kFlippersI,
                     Constants.TowerConstants.kFlippersD);
         ClosedLoopConfig spindexerClosedLoopConfig = flippersConfig.closedLoop;
-              spindexerClosedLoopConfig.apply(flippersFeedForwardConfig);
+            //   spindexerClosedLoopConfig.apply(flippersFeedForwardConfig);
               flippersConfig.apply(spindexerClosedLoopConfig);
 
 

@@ -47,9 +47,10 @@ public class ShooterSubsystem extends SubsystemBase {
       shooterClosedLoopConfig.apply(shooterFeedForwardConfig);
       shooterLeaderConfig.apply(shooterClosedLoopConfig);
 
-      // These lines NEED to be after defining config parameters for the lead motor
-      shooterFollowerConfig.apply(shooterLeaderConfig);
-      shooterFollowerConfig.follow(12, true);
+    // These lines NEED to be after defining config parameters for the lead motor
+    shooterFollowerConfig.apply(shooterLeaderConfig);
+    // Make the follower follow the leader motor ID (use constant) instead of an inline literal
+    shooterFollowerConfig.follow(Constants.ShooterConstants.LEADERSHOOTERID, true);
 
       shooterLeader.configure(shooterLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
       shooterFollower.configure(shooterFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -60,6 +61,11 @@ public class ShooterSubsystem extends SubsystemBase {
     public void setShooterVelocity(double velocityRPM) {
         shooterLeader.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
     }
+
+  /** Open-loop percent output for the shooter leader (range -1.0 to 1.0). Useful for quick tests. */
+  public void setShooterPercent(double percent) {
+    shooterLeader.set(percent);
+  }
     
     public boolean isShooting() {
 

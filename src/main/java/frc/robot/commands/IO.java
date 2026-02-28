@@ -18,7 +18,7 @@ public class IO {
     public static XboxController driverXbox = new XboxController(0);
 
 
-    Trigger shootButton = new Trigger(() -> driverXbox.getRightTriggerAxis() > 0.7);//XboxController...RightTrigger
+    Trigger shootButton = new Trigger(() -> driverXbox.getAButton());//XboxController...RightTrigger
     Trigger toggleIntakeButton = new Trigger(() -> driverXbox.getLeftTriggerAxis() > 0.7);//XboxController...B
 
     // LED Button

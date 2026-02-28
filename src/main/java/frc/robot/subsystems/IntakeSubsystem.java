@@ -56,9 +56,10 @@ public class IntakeSubsystem extends SubsystemBase  {
         intakeRollerClosedLoopConfig.apply(intakeRollerFeedForwardConfig);
         intakeRollerConfig.apply(intakeRollerClosedLoopConfig);
 
-        intakeArmConfig.idleMode(IdleMode.kBrake);
-        intakeArmConfig.smartCurrentLimit(Constants.IntakeConstants.INTAKE_ARM_MOTORS_CURRENT_LIMIT);
-        intakeArmConfig.voltageCompensation(Constants.IntakeConstants.INTAKE_ARM_MOTORS_CURRENT_LIMIT);
+    intakeArmConfig.idleMode(IdleMode.kBrake);
+    intakeArmConfig.smartCurrentLimit(Constants.IntakeConstants.INTAKE_ARM_MOTORS_CURRENT_LIMIT);
+    // Use the voltage constant (was incorrectly passing the current limit)
+    intakeArmConfig.voltageCompensation(Constants.IntakeConstants.INTAKE_ARM_MOTORS_VOLTAGE);
 
         // intakeArmFeedForwardConfig
         //                     .kS(Constants.IntakeConstants.kArmS)
@@ -84,6 +85,11 @@ public class IntakeSubsystem extends SubsystemBase  {
     public void spinIntake(double velocityRPM) {
 
         intakeRoller.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
+    }
+
+    /** Open-loop percent output for the intake roller (range -1.0 to 1.0) */
+    public void spinIntakePercent(double percent) {
+        intakeRoller.set(percent);
     }
 
     public void deployIntake(double deployPoint) {

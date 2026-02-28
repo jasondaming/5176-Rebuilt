@@ -45,17 +45,17 @@ public final class Constants
   public static class ShooterConstants // Keep in mind these values affect 2 motors working together
   {
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
-    public static final double SHOOTER_TARGET_VELOCITY_RPM = 3000.0;
+    public static final double SHOOTER_TARGET_VELOCITY_RPM = 200.0;
 
     // Shooter PID Constants
-    public static final double kP = 0.1;// Needs Tuning - Proportional Gain
+    public static final double kP = 0.01;// Needs Tuning - Proportional Gain
     public static final double kI = 0.0;
     public static final double kD = 0.0;// Needs Tuning - Derivative Gain
     // public static final double kIz = 0.0; --- IGNORE ---
 
     // Feed Forward Constants
-    public static final double kS = 0.0; // Needs Tuning - Static Friction Gain. Needed to overcome initial static friction.
-    public static final double kV = 0.0; // Needs Tuning - Velocity Gain. Relates voltage to velocity.
+    public static final double kS = 0.01; // Needs Tuning - Static Friction Gain. Needed to overcome initial static friction.
+    public static final double kV = 0.12; // Needs Tuning - Velocity Gain. Relates voltage to velocity.
     public static final double kA = 0.0; // Needs Tuning - Acceleration Gain. Relates voltage to acceleration.
 
     // Shooter Motor Current Limit and Voltage
@@ -107,11 +107,12 @@ public final class Constants
   public static class TransportConstants {
 
     public static final double kTransportS = 0;
-    public static final double kTransportV = 0;
+    public static final double kTransportV = 0.12;
     public static final double kTransportA = 0;
 
 
-    public static final double kTransportP = 0.1;
+    
+    public static final double kTransportP = 0.00003;
     public static final double kTransportI = 0;
     public static final double kTransportD = 0;
 
@@ -124,12 +125,12 @@ public final class Constants
 
   public static class SpindexerConstants {
 
-    public static final double kSpindexS = 0;
-    public static final double kSpindexV = 0;
+    public static final double kSpindexS = 0.001;
+    public static final double kSpindexV = 0.12;
     public static final double kSpindexA = 0;
 
 
-    public static final double kSpindexP = 0.1;
+    public static final double kSpindexP = 0.1 ;
     public static final double kSpindexI = 0;
     public static final double kSpindexD = 0;
 
