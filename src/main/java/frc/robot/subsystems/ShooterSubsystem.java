@@ -29,9 +29,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
     //   shooterFeedForwardConfig
     //         .kS(Constants.ShooterConstants.kS) // Needed to overcome static friction
-    //         .kV(Constants.ShooterConstants.kV) // Velocity gain?
-    //         .kA(Constants.ShooterConstants.kA);// Acceleration gain?
+    //         .kV(Constants.ShooterConstants.kV); // Velocity gain?
 
+    
       shooterLeaderConfig.idleMode(IdleMode.kBrake);
       shooterLeaderConfig.voltageCompensation(Constants.ShooterConstants.SHOOTER_MOTORS_VOLTAGE);
       shooterLeaderConfig.smartCurrentLimit(Constants.ShooterConstants.SHOOTER_MOTORS_CURRENT_LIMIT);
