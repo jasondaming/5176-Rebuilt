@@ -43,9 +43,7 @@ public class IntakeSubsystem extends SubsystemBase  {
 
         // intakeRollerFeedForwardConfig
         //                     .kS(Constants.IntakeConstants.kRollerS)
-        //                     .kV(Constants.IntakeConstants.kRollerV)
-        //                     .kA(Constants.IntakeConstants.kRollerA);
-
+        //                     .kV(Constants.IntakeConstants.kRollerV);
         intakeRollerConfig.closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
                 .pid(
@@ -63,9 +61,8 @@ public class IntakeSubsystem extends SubsystemBase  {
 
         // intakeArmFeedForwardConfig
         //                     .kS(Constants.IntakeConstants.kArmS)
-        //                     .kV(Constants.IntakeConstants.kArmV)
-        //                     .kA(Constants.IntakeConstants.kArmA);
-
+        //                     .kV(Constants.IntakeConstants.kArmV);
+        
         intakeArmConfig.closedLoop
                     .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
                     .pid(

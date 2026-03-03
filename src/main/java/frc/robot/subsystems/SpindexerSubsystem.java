@@ -34,12 +34,17 @@ public class SpindexerSubsystem extends SubsystemBase {
                         //   .kV(Constants.SpindexerConstants.kSpindexV);
                         //   .kA(Constants.SpindexerConstants.kSpindexA);
 
+        //                   .kS(Constants.SpindexerConstants.kSpindexS)
+        //                   .kV(Constants.SpindexerConstants.kSpindexV);
+
+        
         spindexerConfig.closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
                 .pid(
                     Constants.SpindexerConstants.kSpindexP,
                     Constants.SpindexerConstants.kSpindexI,
                     Constants.SpindexerConstants.kSpindexD);
+
         ClosedLoopConfig spindexerClosedLoopConfig = spindexerConfig.closedLoop;
             //    spindexerClosedLoopConfig.apply(spindexerFeedForwardConfig);
               spindexerConfig.apply(spindexerClosedLoopConfig);
