@@ -14,11 +14,10 @@ import frc.robot.commands.IO;
 
 public class RebuiltCommands {
 
-
     public static final Command shootFuel = new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM), Robot.shooterSubsystem);
     public static final Command stopShoot = new InstantCommand(()-> Robot.shooterSubsystem.setShooterVelocity(0), Robot.shooterSubsystem);
     
-    public static final Command runSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem);
+    public static final Command startSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem);
     public static final Command stopSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem);
 
     // Use an RPM value for the intake roller (closed-loop velocity). 0.5 looked like a percent and caused hunting.
@@ -39,29 +38,36 @@ public class RebuiltCommands {
 
 
     public static final ConditionalCommand toggleShoot = new ConditionalCommand(
-        stopShoot.andThen(stopSpindexer),
-        shootFuel.andThen(new WaitCommand(1)).andThen(runSpindexer),
+        stopShoot.andThen(stopTransport).andThen(stopSpindexer),
+        shootFuel.andThen(new WaitCommand(0.5)).andThen(startTransport).andThen(startSpindexer),
         Robot.shooterSubsystem::isShooting
     );
 
-    public static final ConditionalCommand toggleIntake = new ConditionalCommand(
-        stopIntake,
-        startIntake,
-        Robot.intakeSubsystem::isIntaking
-    );
+    // public static final ConditionalCommand toggleIntake = new ConditionalCommand(
+    //     stopIntake,
+    //     startIntake,
+    //     Robot.intakeSubsystem::isIntaking
+    // );
 
     // just temporary command
-    public static final ConditionalCommand toggleTransport = new ConditionalCommand(
-        stopTransport,
-        startTransport,
-        Robot.transportSubsystem::isTransporting
-    );
+    // public static final ConditionalCommand toggleTransport = new ConditionalCommand(
+    //     stopTransport,
+    //     startTransport,
+    //     Robot.transportSubsystem::isTransporting
+    // );
 
-    public static final SequentialCommandGroup rumble = new SequentialCommandGroup(
-        startRumble,
-        new WaitCommand(1),
-        stopRumble
-    );
+    //  public static final ConditionalCommand toggleSpindex = new ConditionalCommand(
+    //     stopSpindexer,
+    //     startSpindexer,
+    //     Robot.spindexerSubsystem::isSpindexing
+    // );
+
+
+    // public static final SequentialCommandGroup rumble = new SequentialCommandGroup(
+    //     startRumble,
+    //     new WaitCommand(1),
+    //     stopRumble
+    // );
 
 
 

@@ -57,4 +57,15 @@ public class SpindexerSubsystem extends SubsystemBase {
         spindexer.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
     }
 
+    // added temporly to test Spindexer
+     public double getVelocity()
+    {
+        return spindexer.getEncoder().getVelocity();
+    }
+
+    public boolean isSpindexing()
+    {
+        return  Math.abs(spindexer.getEncoder().getVelocity()) > 2000;
+    }
+
    }
