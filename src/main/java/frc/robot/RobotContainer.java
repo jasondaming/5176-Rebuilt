@@ -57,7 +57,7 @@ public class RobotContainer
                                                                     () -> driverXbox.getLeftX() * -1.0)
                                                                     .withControllerRotationAxis(() -> driverXbox.getRightX())
                                                                     .deadband(OperatorConstants.DEADBAND)
-                                                                    .scaleTranslation(0.8)
+                                                                    .scaleTranslation(0.5)
                                                                     .allianceRelativeControl(true);
                                                                     
   SwerveInputStream driveDirectAngle = driveAngularVelocity.copy()
@@ -93,11 +93,6 @@ public class RobotContainer
           new Pose2d(Constants.driveToPoseConstants.BlueRightTranslation, Constants.driveToPoseConstants.RedRightRotation)));
       }
     }
-
-  
-
-
-
 };
 
 
