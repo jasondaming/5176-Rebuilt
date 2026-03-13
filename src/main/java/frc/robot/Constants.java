@@ -45,18 +45,18 @@ public final class Constants
   public static class ShooterConstants // Keep in mind these values affect 2 motors working together
   {
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
-    public static final double SHOOTER_TARGET_VELOCITY_RPM = 360.0;//3000
+    public static final double SHOOTER_TARGET_VELOCITY_RPM = 2000.0;//3000
 
     // Shooter PID Constants
-    public static final double kP = 0.001;// 0.0004 is a GOOD value for shooting! Needs Tuning - Proportional Gain
+    public static final double kP = 0.0038;// 0.0004 is a GOOD value for shooting! Needs Tuning - Proportional Gain
     public static final double kI = 0.0;
-    public static final double kD = 0.0;// Needs Tuning - Derivative Gain
+    public static final double kD = 0;// Needs Tuning - Derivative Gain
     // public static final double kIz = 0.0; --- IGNORE ---
 
     // Feed Forward Constants
     // public static final double kS = 0.20; // Needs Tuning - Static Friction Gain. Needed to overcome initial static friction.
-    public static final double kV = 0.12; // Needs Tuning - Velocity Gain. Relates voltage to velocity.
-    // // public static final double kA = 0.0; // Needs Tuning - Acceleration Gain. Relates voltage to acceleration.
+    public static final double kV = 0.17; // Needs Tuning - Velocity Gain. Relates voltage to velocity.
+    public static final double kA = 0.70; // Needs Tuning - Acceleration Gain. Relates voltage to acceleration.
 
     // Shooter Motor Current Limit and Voltage
     public static final int SHOOTER_MOTORS_CURRENT_LIMIT = 40; // Amps
@@ -83,8 +83,8 @@ public final class Constants
     public static final double INTAKE_ROLLER_VELOCITY_RPM = 2500.0;
 
     public static final double kArmV = 0.61;
-    public static final double kArmA = 1.42;
-    public static final double kArmG = 9.20;
+    public static final double kArmA = 0.042;
+    public static final double kArmG = 0.20;
 
 
     public static final double kArmP = 0.0008;
