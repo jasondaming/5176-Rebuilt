@@ -34,6 +34,7 @@ public class ShooterSubsystem extends SubsystemBase {
       shooterLeaderConfig.idleMode(IdleMode.kBrake);
       shooterLeaderConfig.voltageCompensation(Constants.ShooterConstants.SHOOTER_MOTORS_VOLTAGE);
       shooterLeaderConfig.smartCurrentLimit(Constants.ShooterConstants.SHOOTER_MOTORS_CURRENT_LIMIT);
+      shooterLeaderConfig.encoder.uvwMeasurementPeriod(10);
 
       shooterLeaderConfig.closedLoop
             .feedbackSensor(FeedbackSensor.kPrimaryEncoder)

@@ -40,10 +40,13 @@ public class IntakeSubsystem extends SubsystemBase  {
         intakeRollerConfig.idleMode(IdleMode.kBrake);
         intakeRollerConfig.smartCurrentLimit(Constants.IntakeConstants.INTAKE_ROLLER_MOTORS_CURRENT_LIMIT);
         intakeRollerConfig.voltageCompensation(Constants.IntakeConstants.INTAKE_ROLLER_MOTORS_VOLTAGE);
+        intakeRollerConfig.encoder.uvwMeasurementPeriod(10);
+
 
         // intakeRollerFeedForwardConfig
         //                     .kS(Constants.IntakeConstants.kRollerS)
         //                     .kV(Constants.IntakeConstants.kRollerV);
+
         intakeRollerConfig.closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
                 .pid(
@@ -58,10 +61,15 @@ public class IntakeSubsystem extends SubsystemBase  {
     intakeArmConfig.smartCurrentLimit(Constants.IntakeConstants.INTAKE_ARM_MOTORS_CURRENT_LIMIT);
     // Use the voltage constant (was incorrectly passing the current limit)
     intakeArmConfig.voltageCompensation(Constants.IntakeConstants.INTAKE_ARM_MOTORS_VOLTAGE);
+    intakeArmConfig.encoder.uvwMeasurementPeriod(10);
 
-        // intakeArmFeedForwardConfig
-        //                     .kS(Constants.IntakeConstants.kArmS)
-        //                     .kV(Constants.IntakeConstants.kArmV);
+
+        /*
+        intakeArmFeedForwardConfig
+                            .kV(Constants.IntakeConstants.kArmV)
+                            .kA(Constants.IntakeConstants.kArmA)
+                            .kG(Constants.IntakeConstants.kArmG);
+        */
         
         intakeArmConfig.closedLoop
                     .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
@@ -105,6 +113,7 @@ public class IntakeSubsystem extends SubsystemBase  {
     {
         return  Math.abs(intakeRoller.getEncoder().getVelocity()) > 200;
     }
+
     public boolean isDeployed(){
         return isDeployed;
     }
