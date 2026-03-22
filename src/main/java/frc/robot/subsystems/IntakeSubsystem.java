@@ -62,12 +62,12 @@ public class IntakeSubsystem extends SubsystemBase  {
     intakeArmConfig.encoder.uvwMeasurementPeriod(10);
 
 
-        /*
+        
         intakeArmFeedForwardConfig
                             .kV(Constants.IntakeConstants.kArmV)
                             .kA(Constants.IntakeConstants.kArmA)
                             .kG(Constants.IntakeConstants.kArmG);
-        */
+        
         
         intakeArmConfig.closedLoop
                     .feedbackSensor(FeedbackSensor.kPrimaryEncoder)

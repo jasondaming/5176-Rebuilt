@@ -21,6 +21,7 @@ public class IO {
   JoystickButton shootButton = new JoystickButton(driverXbox,  1);
   JoystickButton intakeButton = new JoystickButton(driverXbox, 2);
   JoystickButton intakeAngleButton = new JoystickButton(driverXbox, 5);
+  JoystickButton intakeRetractButton = new JoystickButton(driverXbox, 6);
  
     // JoystickButton toggleSpindexerButton = new JoystickButton(driverXbox,  3);
     // JoystickButton shootOnlyButton = new JoystickButton(driverXbox, 2);
@@ -38,7 +39,8 @@ public class IO {
       // press and the end lambda is guaranteed to run on release.
       intakeButton.whileTrue(RebuiltCommands.intakeWhileHeld); 
 
-      intakeAngleButton.onTrue(RebuiltCommands.angleIntake);
+      intakeAngleButton.whileTrue(RebuiltCommands.deployIntake);
+      intakeRetractButton.whileTrue(RebuiltCommands.retractIntake);
       
         // shootButton.onFalse(RebuiltCommands.toggleShoot);
 

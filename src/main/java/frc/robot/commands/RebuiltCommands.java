@@ -48,15 +48,15 @@ public class RebuiltCommands {
 
     public static final ConditionalCommand toggleShoot = new ConditionalCommand(
         stopShoot.andThen(stopTransport).andThen(stopSpindexer),
-        shootFuel.andThen(new WaitCommand(5.0)).andThen(startTransport).andThen(new WaitCommand(2.0)).andThen(startSpindexer),
+        shootFuel.andThen(new WaitCommand(4.0)).andThen(startTransport).andThen(new WaitCommand(1.0)).andThen(startSpindexer),
         Robot.shooterSubsystem::isShooting
     );
 
-    public static final ConditionalCommand angleIntake = new ConditionalCommand(
-        retractIntake,
-        deployIntake,
-        Robot.intakeSubsystem::isDeployed
-    );
+    // public static final ConditionalCommand angleIntake = new ConditionalCommand(
+    //     retractIntake,
+    //     deployIntake,
+    //     Robot.intakeSubsystem::isDeployed
+    // );
 
 
     // public static final ConditionalCommand toggleIntake = new ConditionalCommand(

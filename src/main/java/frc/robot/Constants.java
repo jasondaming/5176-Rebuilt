@@ -45,18 +45,18 @@ public final class Constants
   public static class ShooterConstants // Keep in mind these values affect 2 motors working together
   {
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
-    public static final double SHOOTER_TARGET_VELOCITY_RPM = 2200.0;//3000
+    public static final double SHOOTER_TARGET_VELOCITY_RPM = 2000.0;//3000
 
     // Shooter PID Constants
-    public static final double kP = 0.00058;// 0.0004 is a GOOD value for shooting! Needs Tuning - Proportional Gain
+    public static final double kP = 0.0008;// 0.0004 is a GOOD value for shooting! Needs Tuning - Proportional Gain
     public static final double kI = 0.0;
     public static final double kD = 0.0;// Needs Tuning - Derivative Gain
     // public static final double kIz = 0.0; --- IGNORE ---
 
     // Feed Forward Constants
     // public static final double kS = 0.20; // Needs Tuning - Static Friction Gain. Needed to overcome initial static friction.
-    public static final double kV = 0.77; // Needs Tuning - Velocity Gain. Relates voltage to velocity.
-    public static final double kA = 3.0; // Needs Tuning - Acceleration Gain. Relates voltage to acceleration.
+    public static final double kV = 0.009; // Needs Tuning - Velocity Gain. Relates voltage to velocity.
+    // public static final double kA = 1.0; // Needs Tuning - Acceleration Gain. Relates voltage to acceleration.
 
     // Shooter Motor Current Limit and Voltage
     public static final int SHOOTER_MOTORS_CURRENT_LIMIT = 40; // Amps
@@ -82,10 +82,10 @@ public final class Constants
 
     public static final double kArmV = 0.61;
     public static final double kArmA = 0.042;
-    public static final double kArmG = 0.20;
+    public static final double kArmG = 1.00;
 
 
-    public static final double kArmP = 0.008;
+    public static final double kArmP = 0.5;
     public static final double kArmI = 0;
     public static final double kArmD = 0;
 
@@ -104,12 +104,12 @@ public final class Constants
   public static class TransportConstants {
 
     // public static final double kTransportS = 0.001;
-    public static final double kTransportV = 0.3;
+    public static final double kTransportV = 0.01;
     // public static final double kTransportA = 1.0;
 
     public static final double TRANSPORT_VELOCITY_RPM = 700.0; //actually this is 4000 rpm, probably PID?? I, Thomas PRESIDENT OF CLUB OF ROBOTICS ANNO DOMINI 2026 (andrew told me to add that), made this btw
     
-    public static final double kTransportP = 0.00072; //0.0002
+    public static final double kTransportP = 0.00055; //0.0002
     public static final double kTransportI = 0;
     public static final double kTransportD = 0; //0.0008
 
