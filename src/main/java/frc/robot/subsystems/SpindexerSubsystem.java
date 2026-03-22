@@ -28,7 +28,7 @@ public class SpindexerSubsystem extends SubsystemBase {
         spindexerConfig.idleMode(IdleMode.kBrake);
         spindexerConfig.smartCurrentLimit(Constants.SpindexerConstants.SPINDEX_MOTORS_CURRENT_LIMIT);
         spindexerConfig.voltageCompensation(Constants.SpindexerConstants.SPINDEX_MOTORS_VOLTAGE);
-        spindexerConfig.encoder.uvwMeasurementPeriod(8);
+        spindexerConfig.encoder.uvwMeasurementPeriod(10);
 
 
         spindexerFeedForwardConfig

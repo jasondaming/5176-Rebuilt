@@ -43,9 +43,9 @@ public class IntakeSubsystem extends SubsystemBase  {
         intakeRollerConfig.encoder.uvwMeasurementPeriod(10);
 
 
-        // intakeRollerFeedForwardConfig
-        //                     .kS(Constants.IntakeConstants.kRollerS)
-        //                     .kV(Constants.IntakeConstants.kRollerV);
+        intakeRollerFeedForwardConfig
+                            .kA(Constants.IntakeConstants.kRollerA)
+                            .kV(Constants.IntakeConstants.kRollerV);
 
         intakeRollerConfig.closedLoop
                 .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
