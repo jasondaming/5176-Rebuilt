@@ -87,7 +87,7 @@ public final class Constants
     public static final double kArmG = 0.20;
 
 
-    public static final double kArmP = 0.0008;
+    public static final double kArmP = 0.1;
     public static final double kArmI = 0;
     public static final double kArmD = 0;
 
@@ -100,7 +100,7 @@ public final class Constants
 
     public static final int ARMID = 32;
     public static final int ROLLERID1 = 33;
-    // public static final int ROLLERID2 = 32;
+
 
   }
 

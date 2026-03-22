@@ -28,8 +28,6 @@ public class IntakeSubsystem extends SubsystemBase  {
 
     public IntakeSubsystem(){ 
         isDeployed = false;
-        SparkFlexConfig intakeArmLeaderConfig = new SparkFlexConfig();
-        SparkFlexConfig intakeArmFollowerConfig = new SparkFlexConfig();
         
         SparkFlexConfig intakeRollerConfig = new SparkFlexConfig();
         FeedForwardConfig intakeRollerFeedForwardConfig = new FeedForwardConfig();
@@ -58,7 +56,7 @@ public class IntakeSubsystem extends SubsystemBase  {
         intakeRollerConfig.apply(intakeRollerClosedLoopConfig);
 
     intakeArmConfig.idleMode(IdleMode.kBrake);
-    intakeArmConfig.smartCurrentLimit(Constants.IntakeConstants.INTAKE_ARM_MOTORS_CURRENT_LIMIT);
+    //intakeArmConfig.smartCurrentLimit(Constants.IntakeConstants.INTAKE_ARM_MOTORS_CURRENT_LIMIT);
     // Use the voltage constant (was incorrectly passing the current limit)
     intakeArmConfig.voltageCompensation(Constants.IntakeConstants.INTAKE_ARM_MOTORS_VOLTAGE);
     intakeArmConfig.encoder.uvwMeasurementPeriod(10);
