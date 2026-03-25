@@ -1,8 +1,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-//import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
 // Button numbers on the controller:
@@ -10,45 +9,35 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 //IO means Input/Output
 public class IO {
-    //create xbox controller objects
 
-    // public XboxController driverXbox = new XboxController(0); add back????
-
-    // Driver Xbox controller. Port 0 is the usual driver station index; change if your controller is on a different port.
-    public static XboxController driverXbox = new XboxController(0);
-
+  public static XboxController driverXbox = new XboxController(0);
 
   JoystickButton shootButton = new JoystickButton(driverXbox,  1);
   JoystickButton intakeButton = new JoystickButton(driverXbox, 2);
-  JoystickButton intakeAngleButton = new JoystickButton(driverXbox, 5);
+  JoystickButton intakeDeployButton = new JoystickButton(driverXbox, 5);
   JoystickButton intakeRetractButton = new JoystickButton(driverXbox, 6);
- 
-    // JoystickButton toggleSpindexerButton = new JoystickButton(driverXbox,  3);
-    // JoystickButton shootOnlyButton = new JoystickButton(driverXbox, 2);
-   // JoystickButton toggleIntakeButton = new JoystickButton(driverXbox,  5); // Use button 5 (left bumper) for intake toggle
+  Trigger position1Button = new Trigger(() -> driverXbox.getPOV() == 0);
+  
+  // JoystickButton toggleSpindexerButton = new JoystickButton(driverXbox,  3);
+  // JoystickButton shootOnlyButton = new JoystickButton(driverXbox, 2);
+  // JoystickButton toggleIntakeButton = new JoystickButton(driverXbox,  5); // Use button 5 (left bumper) for intake toggle
 
-    // LED Button
-    // JoystickButton ledoff = new JoystickButton(operatorXbox, 4)    .whenPressed(m_turnOnLEDsCommand);
+  // LED Button
+  // JoystickButton ledoff = new JoystickButton(operatorXbox, 4)    .whenPressed(m_turnOnLEDsCommand);
     
-    public IO() {
-        // whiletrue buttons here
+  public IO() {
+    shootButton.onTrue(RebuiltCommands.toggleShoot);
+    // Run intake only while the intake button is held.
+    intakeButton.whileTrue(RebuiltCommands.intakeWhileHeld);
+    position1Button.whileTrue(RebuiltCommands.topPos);
+    intakeDeployButton.onTrue(RebuiltCommands.deployIntake);
+    intakeRetractButton.onTrue(RebuiltCommands.retractIntake);
 
-      shootButton.onTrue(RebuiltCommands.toggleShoot);
-      // Run intake only while the intake button is held. Use an inline
-      // StartEndCommand so a fresh command instance is scheduled on each
-      // press and the end lambda is guaranteed to run on release.
-      intakeButton.whileTrue(RebuiltCommands.intakeWhileHeld); 
-
-      intakeAngleButton.whileTrue(RebuiltCommands.deployIntake);
-      intakeRetractButton.whileTrue(RebuiltCommands.retractIntake);
       
-        // shootButton.onFalse(RebuiltCommands.toggleShoot);
-
+      // shootButton.onFalse(RebuiltCommands.toggleShoot);
       // toggleIntakeButton.toggleOnTrue(RebuiltCommands.startIntake);
-        // toggleTransporButton.toggleOnTrue(RebuiltCommands.toggleTransport);
-        // toggleSpindexerButton.toggleOnTrue(RebuiltCommands.toggleSpindex);
-        // shootOnlyButton.onTrue(RebuiltCommands.shootFuel);
+      // toggleTransporButton.toggleOnTrue(RebuiltCommands.toggleTransport);
+      // toggleSpindexerButton.toggleOnTrue(RebuiltCommands.toggleSpindex);
+      // shootOnlyButton.onTrue(RebuiltCommands.shootFuel);
     }
-
-
 }

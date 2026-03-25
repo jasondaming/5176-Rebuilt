@@ -13,7 +13,6 @@ import com.revrobotics.spark.config.FeedForwardConfig;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -55,7 +54,7 @@ public class IntakeSubsystem extends SubsystemBase  {
         intakeRollerClosedLoopConfig.apply(intakeRollerFeedForwardConfig);
         intakeRollerConfig.apply(intakeRollerClosedLoopConfig);
 
-    intakeArmConfig.idleMode(IdleMode.kBrake);
+    intakeArmConfig.idleMode(IdleMode.kCoast);
     //intakeArmConfig.smartCurrentLimit(Constants.IntakeConstants.INTAKE_ARM_MOTORS_CURRENT_LIMIT);
     // Use the voltage constant (was incorrectly passing the current limit)
     intakeArmConfig.voltageCompensation(Constants.IntakeConstants.INTAKE_ARM_MOTORS_VOLTAGE);
@@ -63,10 +62,10 @@ public class IntakeSubsystem extends SubsystemBase  {
 
 
         
-        intakeArmFeedForwardConfig
-                            .kV(Constants.IntakeConstants.kArmV)
-                            .kA(Constants.IntakeConstants.kArmA)
-                            .kG(Constants.IntakeConstants.kArmG);
+        // intakeArmFeedForwardConfig
+        //                     .kV(Constants.IntakeConstants.kArmV)
+        //                     .kA(Constants.IntakeConstants.kArmA)
+        //                     .kG(Constants.IntakeConstants.kArmG);
         
         
         intakeArmConfig.closedLoop

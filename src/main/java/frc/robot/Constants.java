@@ -59,7 +59,7 @@ public final class Constants
     // public static final double kA = 1.0; // Needs Tuning - Acceleration Gain. Relates voltage to acceleration.
 
     // Shooter Motor Current Limit and Voltage
-    public static final int SHOOTER_MOTORS_CURRENT_LIMIT = 40; // Amps
+    public static final int SHOOTER_MOTORS_CURRENT_LIMIT = 60; // Amps
     public static final double SHOOTER_MOTORS_VOLTAGE = 10.0; // Volts
 
     public static final int LEADERSHOOTERID = 12; // Can ID constant for the lead shoter motor
@@ -74,20 +74,22 @@ public final class Constants
     public static final double kRollerV = 0.19;
     public static final double kRollerA = .512;
 
-    public static final double kRollerP = 0.0046;
+    public static final double kRollerP = 0.00046;
     public static final double kRollerI = 0;
     public static final double kRollerD = 0;
 
-    public static final double INTAKE_ROLLER_VELOCITY_RPM = 2500.0;
+    public static final double INTAKE_ROLLER_VELOCITY_RPM = 1200.0;
 
-    public static final double kArmV = 0.61;
+    public static final double kArmV = 0.91;
     public static final double kArmA = 0.042;
-    public static final double kArmG = 1.00;
+    public static final double kArmG = 0.60;
 
-
-    public static final double kArmP = 0.5;
+    public static final double kArmP = 0.05;
     public static final double kArmI = 0;
     public static final double kArmD = 0;
+
+    public static final double kArmRotations = -.05;
+    public static final double kArmRetractPos = 0.2;
 
     public static final int INTAKE_ROLLER_MOTORS_CURRENT_LIMIT = 40; // Amps
     public static final double INTAKE_ROLLER_MOTORS_VOLTAGE = 10.0; // Volts
@@ -159,7 +161,7 @@ public final class Constants
     public static final double kFlippersV = 0;
     public static final double kFlippersA = 0;
 
-    public static final double kCLIMB_P = 0;
+    public static final double kCLIMB_P = 0.05;
     public static final double kCLIMB_I = 0;
     public static final double kCLIMB_D = 0;
 
@@ -188,14 +190,23 @@ public final class Constants
     public static final Translation2d RedLeftTranslation = new Translation2d(0,0);
     public static final Translation2d RedCenterTranslation = new Translation2d(0,0);
     public static final Translation2d RedRightTranslation = new Translation2d(0,0);
+    public static final Translation2d RedBackRightTranslation = new Translation2d(0,0);
+    public static final Translation2d RedBackLeftTranslation = new Translation2d(0,0);
+
 
     public static final Rotation2d RedLeftRotation = new Rotation2d(0);
     public static final Rotation2d RedCenterRotation = new Rotation2d(0);
     public static final Rotation2d RedRightRotation = new Rotation2d(0);
+    public static final Rotation2d RedBackRightRotation = new Rotation2d(0);
+    public static final Rotation2d RedBackLeftRotation = new Rotation2d(0);
+
 
     public static final Pose2d REDLEFTPOSE2D = new Pose2d(RedLeftTranslation, RedLeftRotation);
     public static final Pose2d REDCENTERPOSE2D = new Pose2d(RedCenterTranslation, RedCenterRotation);
     public static final Pose2d REDRIGHTPOSE2D = new Pose2d(RedRightTranslation, RedRightRotation);
+    public static final Pose2d REDBACKRIGHTPOSE2D = new Pose2d(RedBackRightTranslation, RedBackRightRotation);
+    public static final Pose2d REDBACKLEFTPOSE2D = new Pose2d(RedBackLeftTranslation, RedBackLeftRotation);
+
 
     public static final double SHOOTERPOS1RPM = 500;
     public static final double SHOOTERPOS2RPM = 500;

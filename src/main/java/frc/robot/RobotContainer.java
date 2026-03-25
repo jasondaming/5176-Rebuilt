@@ -9,8 +9,8 @@ import com.pathplanner.lib.auto.AutoBuilder;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OperatorConstants;
@@ -32,7 +32,7 @@ public class RobotContainer
   private final CommandXboxController driverXbox = new CommandXboxController(0);
 
     // Establish a Sendable Chooser that will be able to be sent to the SmartDashboard, allowing selection of desired auto
-  // private final SendableChooser<Command> autoChooser;
+  private final SendableChooser<Command> autoChooser;
   
   // The container for the robot. Contains subsystems, OI devices, and commands.
   
@@ -40,14 +40,12 @@ public class RobotContainer
   
   public RobotContainer()
   {
-    // AutoBuilder ab = new AutoBuilder();
-    //Have the autoChooser pull in all PathPlanner autos as options
-    // autoChooser = AutoBuilder.buildAutoChooser();
-
     drivebase.setupPathPlanner();
-   // configureDriveToPose();
+    configureDriveToPose();
     drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
     DriverStation.silenceJoystickConnectionWarning(true);
+    autoChooser = AutoBuilder.buildAutoChooser();
+    SmartDashboard.putData("Auto Chooser", autoChooser);
     drivebase.zeroGyroWithAlliance();
   }
 
@@ -76,9 +74,9 @@ public class RobotContainer
     return autoChooser.getSelected();
   } */
 
-//   private void configureDriveToPose() {
+  private void configureDriveToPose() {
 
-//     driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
+    driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
 
 //     if(!drivebase.isRedAlliance()) {
 //         driverXbox.x().whileTrue(drivebase.driveToPose(Constants.driveToPoseConstants.BLUELEFTPOSE2D));
@@ -93,8 +91,8 @@ public class RobotContainer
 //           new Pose2d(Constants.driveToPoseConstants.BlueCenterTranslation, Constants.driveToPoseConstants.RedCenterRotation)));
 //         driverXbox.b().whileTrue(drivebase.driveToPose(
 //           new Pose2d(Constants.driveToPoseConstants.BlueRightTranslation, Constants.driveToPoseConstants.RedRightRotation)));
-//       }
+      // }
 //     }
-// };
+  }
 }
 

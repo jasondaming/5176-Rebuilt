@@ -19,22 +19,15 @@ public class RebuiltCommands {
     public static final Command startSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(Constants.SpindexerConstants.SPINDEXER_TARGET_VELOCITY_RPM), Robot.spindexerSubsystem);
     public static final Command stopSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem);
 
-    // Use an RPM value for the intake roller (closed-loop velocity). 0.5 looked like a percent and caused hunting.
-    public static final Command startIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(200.0), Robot.intakeSubsystem);
-    public static final Command stopIntake = new InstantCommand(()-> Robot.intakeSubsystem.spinIntake(0.0), Robot.intakeSubsystem);
-
-    // Run the intake rollers while the button is held. StartEndCommand calls the
-    // start runnable when the command is initialized and the end runnable when
-    // the command is interrupted or finishes (which will happen on button
-    // release when used with a whileTrue binding).
+    // Run the intake rollers while the button is held.
     public static final Command intakeWhileHeld = new StartEndCommand(
         () -> Robot.intakeSubsystem.spinIntake(Constants.IntakeConstants.INTAKE_ROLLER_VELOCITY_RPM),
         () -> Robot.intakeSubsystem.spinIntake(0.0),
         Robot.intakeSubsystem
     );
 
-    public static final Command deployIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(1.805) ,Robot.intakeSubsystem);
-    public static final Command retractIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(0.2), Robot.intakeSubsystem);
+    public static final Command deployIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(Constants.IntakeConstants.kArmRotations) ,Robot.intakeSubsystem);
+    public static final Command retractIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(Constants.IntakeConstants.kArmRetractPos), Robot.intakeSubsystem);
 
     public static final Command startTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(Constants.TransportConstants.TRANSPORT_VELOCITY_RPM), Robot.transportSubsystem);
     public static final Command stopTransport = new InstantCommand(()-> Robot.transportSubsystem.setTransport(0), Robot.transportSubsystem);
@@ -52,6 +45,9 @@ public class RebuiltCommands {
         Robot.shooterSubsystem::isShooting
     );
 
+    public static final Command topPos = new InstantCommand(
+        ()-> Robot.towerClimbSubsystem.setTowerClimbPosition(0.5), Robot.towerClimbSubsystem);
+
     // public static final ConditionalCommand angleIntake = new ConditionalCommand(
     //     retractIntake,
     //     deployIntake,
@@ -63,13 +59,6 @@ public class RebuiltCommands {
     //     stopIntake,
     //     startIntake,
     //     Robot.intakeSubsystem::isIntaking
-    // );
-
-    // just temporary command
-    // public static final ConditionalCommand toggleTransport = new ConditionalCommand(
-    //     stopTransport,
-    //     startTransport,
-    //     Robot.transportSubsystem::isTransporting
     // );
 
     //  public static final ConditionalCommand toggleSpindex = new ConditionalCommand(

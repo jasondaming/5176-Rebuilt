@@ -35,7 +35,7 @@ public class Robot extends TimedRobot
   public static IntakeSubsystem intakeSubsystem;
   public static ShooterSubsystem shooterSubsystem;
   public static TransportSubsystem transportSubsystem;
-  // public static TowerClimbSubsystem towerClimbSubsystem;
+  public static TowerClimbSubsystem towerClimbSubsystem;
   public static IO io;
 
 
@@ -68,7 +68,7 @@ public class Robot extends TimedRobot
     intakeSubsystem = new IntakeSubsystem();
     shooterSubsystem = new ShooterSubsystem();
     transportSubsystem = new TransportSubsystem();
-    // towerClimbSubsystem = new TowerClimbSubsystem();
+    towerClimbSubsystem = new TowerClimbSubsystem();
     io = new IO();
 
     // Create a timer to disable motor brake a few seconds after disable.  This will let the robot stop

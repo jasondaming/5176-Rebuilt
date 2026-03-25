@@ -255,6 +255,7 @@ public class SwerveSubsystem extends SubsystemBase
         double redDistanceFromLeft;
         double redDistanceFromCenter;
         double redDistanceFromRight;
+        double redDistanceFromBackRight;
 
         double rLXDist = Constants.driveToPoseConstants.RedLeftTranslation.getX() - currentPose.getX();
         double rLYDist = Constants.driveToPoseConstants.RedLeftTranslation.getY() - currentPose.getY();
@@ -262,10 +263,15 @@ public class SwerveSubsystem extends SubsystemBase
         double rCYDist = Constants.driveToPoseConstants.RedCenterTranslation.getY() - currentPose.getY();
         double rRXDist = Constants.driveToPoseConstants.RedRightTranslation.getX() - currentPose.getX();
         double rRYDist = Constants.driveToPoseConstants.RedRightTranslation.getY() - currentPose.getY();
+        double rBRXDist = Constants.driveToPoseConstants.RedBackRightTranslation.getX() - currentPose.getX();
+        double rBRYDist = Constants.driveToPoseConstants.RedBackRightTranslation.getY() - currentPose.getY();
+        double rBLXDist = Constants.driveToPoseConstants.RedBackLeftTranslation.getX() - currentPose.getX();
+        double rBLYDist = Constants.driveToPoseConstants.RedBackLeftTranslation.getY() - currentPose.getY();
 
         redDistanceFromLeft = Math.sqrt((Math.pow(rLXDist, 2) + Math.pow(rLYDist, 2)));
         redDistanceFromCenter = Math.sqrt((Math.pow(rCXDist, 2) + Math.pow(rCYDist, 2)));
         redDistanceFromRight = Math.sqrt((Math.pow(rRXDist, 2) + Math.pow(rRYDist, 2)));
+        redDistanceFromBackRight = Math.sqrt((Math.pow(rBRXDist, 2) + Math.pow(rBRYDist, 2)));
 
         if(redDistanceFromLeft < redDistanceFromCenter && redDistanceFromLeft < redDistanceFromRight) {
           bestPose = Constants.driveToPoseConstants.BLUELEFTPOSE2D;
