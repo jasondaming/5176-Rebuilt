@@ -68,8 +68,8 @@ public class TowerClimbSubsystem extends SubsystemBase {
         towerClimbConfig.Slot0.kI = Constants.TowerConstants.kCLIMB_I;
         towerClimbConfig.Slot0.kD = Constants.TowerConstants.kCLIMB_D;
 
-        towerClimbConfig.Voltage.withPeakForwardVoltage(1)
-                                .withPeakReverseVoltage(1);
+        towerClimbConfig.Voltage.withPeakForwardVoltage(6)
+                                .withPeakReverseVoltage(6);
         towerClimbConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         StatusCode statusOne = StatusCode.StatusCodeNotInitialized;
@@ -110,9 +110,7 @@ public class TowerClimbSubsystem extends SubsystemBase {
 
     public double displayEncoder() {
 
-        // return towerClimbLead.getPosition().getValueAsDouble();
-        return 1;
+        return towerClimbLead.getPosition().getValueAsDouble();
     }
 
-    
 }

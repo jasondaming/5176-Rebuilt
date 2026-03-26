@@ -33,8 +33,8 @@ public class IO {
     // Run intake only while the intake button is held.
     // intakeButton.whileTrue(RebuiltCommands.toggleIntake);
     intakeButton.onTrue(RebuiltCommands.getToggleIntake());
-    position1Button.onTrue(RebuiltCommands.towerStop);
-    position2Button.onTrue(RebuiltCommands.towerDown);
+    position1Button.onTrue(RebuiltCommands.topPos);
+    position2Button.onTrue(RebuiltCommands.bottomPos);
     // intakeDeployButton.onTrue(RebuiltCommands.deployIntake);
     // intakeRetractButton.onTrue(RebuiltCommands.retractIntake);
 
