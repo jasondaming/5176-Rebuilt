@@ -89,12 +89,12 @@ public class RobotContainer
       driverXbox.b().whileTrue(
         drivebase.driveToPose(new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(-130))));
     }else{
-    driverXbox.x().whileTrue(
-      drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(50))));
-    driverXbox.y().whileTrue(
-      drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(0))));
-    driverXbox.b().whileTrue(
-      drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(-50))));
+      driverXbox.x().whileTrue(
+        drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(-50))));
+      driverXbox.y().whileTrue(
+          drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(0))));
+      driverXbox.b().whileTrue(
+            drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(50))));
     }
 
 
