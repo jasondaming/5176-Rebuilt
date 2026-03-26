@@ -92,8 +92,7 @@ public class TowerClimbSubsystem extends SubsystemBase {
 
     public void setTowerClimbPosition(double rotations) {
 
-        double rawRotations = rotations*25; 
-        towerClimbLead.setControl(towerClimbPositionVoltage.withPosition(rawRotations));
+        towerClimbLead.setControl(towerClimbPositionVoltage.withPosition(rotations));
         // towerClimbFollow.setControl(towerClimbPositionVoltage.withPosition(rawRotations * -1.0));
     }
 
