@@ -180,14 +180,20 @@ public final class Constants
     public static final Translation2d BlueLeftTranslation = new Translation2d(0,0);
     public static final Translation2d BlueCenterTranslation = new Translation2d(0,0);
     public static final Translation2d BlueRightTranslation = new Translation2d(0,0);
+    public static final Translation2d BlueBackRightTranslation = new Translation2d(0,0);
+    public static final Translation2d BlueBackLeftTranslation = new Translation2d(0,0);
 
     public static final Rotation2d BlueLeftRotation = new Rotation2d(0);
     public static final Rotation2d BlueCenterRotation = new Rotation2d(0);
     public static final Rotation2d BlueRightRotation = new Rotation2d(0);
+    public static final Rotation2d BlueBackRightRotation = new Rotation2d(0);
+    public static final Rotation2d BlueBackLeftRotation = new Rotation2d(0);
 
     public static final Pose2d BLUELEFTPOSE2D = new Pose2d(BlueLeftTranslation, BlueLeftRotation);
     public static final Pose2d BLUECENTERPOSE2D = new Pose2d(BlueCenterTranslation, BlueCenterRotation);
     public static final Pose2d BLUERIGHTPOSE2D = new Pose2d(BlueRightTranslation, BlueRightRotation);
+    public static final Pose2d BLUEBACKRIGHTPOSE2D = new Pose2d(BlueBackRightTranslation, BlueBackRightRotation);
+    public static final Pose2d BLUEBACKLEFTPOSE2D = new Pose2d(BlueBackLeftTranslation, BlueBackLeftRotation);
 
     public static final Translation2d RedLeftTranslation = new Translation2d(0,0);
     public static final Translation2d RedCenterTranslation = new Translation2d(0,0);

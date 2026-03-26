@@ -53,8 +53,6 @@ import swervelib.parser.SwerveDriveConfiguration;
 import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
-import swervelib.SwerveInputStream;
-import swervelib.imu.NavX3Swerve;
 
 
 
@@ -744,6 +742,7 @@ public class SwerveSubsystem extends SubsystemBase
         double redDistanceFromCenter;
         double redDistanceFromRight;
         double redDistanceFromBackRight;
+        double redDistanceFromBackLeft;
 
         double rLXDist = Constants.driveToPoseConstants.RedLeftTranslation.getX() - currentPose.getX();
         double rLYDist = Constants.driveToPoseConstants.RedLeftTranslation.getY() - currentPose.getY();
@@ -760,18 +759,26 @@ public class SwerveSubsystem extends SubsystemBase
         redDistanceFromCenter = Math.sqrt((Math.pow(rCXDist, 2) + Math.pow(rCYDist, 2)));
         redDistanceFromRight = Math.sqrt((Math.pow(rRXDist, 2) + Math.pow(rRYDist, 2)));
         redDistanceFromBackRight = Math.sqrt((Math.pow(rBRXDist, 2) + Math.pow(rBRYDist, 2)));
+        redDistanceFromBackLeft = Math.sqrt((Math.pow(rBLXDist, 2) + Math.pow(rBLYDist, 2)));
 
-        if(redDistanceFromLeft < redDistanceFromCenter && redDistanceFromLeft < redDistanceFromRight) {
-          bestPose = Constants.driveToPoseConstants.BLUELEFTPOSE2D;
-        } else if(redDistanceFromCenter < redDistanceFromRight) {
-          bestPose = Constants.driveToPoseConstants.BLUECENTERPOSE2D;
+
+        if(redDistanceFromLeft < redDistanceFromCenter && redDistanceFromLeft < redDistanceFromRight && redDistanceFromLeft < redDistanceFromBackRight && redDistanceFromLeft < redDistanceFromBackLeft) {
+          bestPose = Constants.driveToPoseConstants.REDLEFTPOSE2D;
+        } else if(redDistanceFromCenter < redDistanceFromRight && redDistanceFromCenter < redDistanceFromBackRight && redDistanceFromCenter < redDistanceFromBackLeft) {
+          bestPose = Constants.driveToPoseConstants.REDCENTERPOSE2D;
+        } else if(redDistanceFromRight < redDistanceFromBackRight && redDistanceFromRight < redDistanceFromBackLeft) {
+          bestPose = Constants.driveToPoseConstants.REDRIGHTPOSE2D;
+        } else if(redDistanceFromBackRight < redDistanceFromBackLeft) {
+          bestPose = Constants.driveToPoseConstants.REDBACKRIGHTPOSE2D;
         } else {
-          bestPose = Constants.driveToPoseConstants.BLUERIGHTPOSE2D;
+          bestPose = Constants.driveToPoseConstants.REDBACKLEFTPOSE2D;
         }
       } else {
         double blueDistanceFromLeft;
         double blueDistanceFromCenter;
         double blueDistanceFromRight;
+        double blueDistanceFromBackRight;
+        double blueDistanceFromBackLeft;
 
         double bLXDist = Constants.driveToPoseConstants.BlueLeftTranslation.getX() - currentPose.getX();
         double bLYDist = Constants.driveToPoseConstants.BlueLeftTranslation.getY() - currentPose.getY();
@@ -779,22 +786,30 @@ public class SwerveSubsystem extends SubsystemBase
         double bCYDist = Constants.driveToPoseConstants.BlueCenterTranslation.getY() - currentPose.getY();
         double bRXDist = Constants.driveToPoseConstants.BlueRightTranslation.getX() - currentPose.getX();
         double bRYDist = Constants.driveToPoseConstants.BlueRightTranslation.getY() - currentPose.getY();
+        double bBRXDist = Constants.driveToPoseConstants.BlueBackRightTranslation.getX() - currentPose.getX();
+        double bBRYDist = Constants.driveToPoseConstants.BlueBackRightTranslation.getY() - currentPose.getY();
+        double bBLXDist = Constants.driveToPoseConstants.BlueBackLeftTranslation.getX() - currentPose.getX();
+        double bBLYDist = Constants.driveToPoseConstants.BlueBackLeftTranslation.getY() - currentPose.getY();
 
         blueDistanceFromLeft = Math.sqrt((Math.pow(bLXDist, 2) + Math.pow(bLYDist, 2)));
         blueDistanceFromCenter = Math.sqrt((Math.pow(bCXDist, 2) + Math.pow(bCYDist, 2)));
         blueDistanceFromRight = Math.sqrt((Math.pow(bRXDist, 2) + Math.pow(bRYDist, 2)));
-
-        if(blueDistanceFromLeft < blueDistanceFromCenter && blueDistanceFromLeft < blueDistanceFromRight) {
+        blueDistanceFromBackRight = Math.sqrt((Math.pow(bBRXDist, 2) + Math.pow(bBRYDist, 2)));
+        blueDistanceFromBackLeft = Math.sqrt((Math.pow(bBLXDist, 2) + Math.pow(bBLYDist, 2)));
+        if(blueDistanceFromLeft < blueDistanceFromCenter && blueDistanceFromLeft < blueDistanceFromRight && blueDistanceFromLeft < blueDistanceFromBackRight && blueDistanceFromLeft < blueDistanceFromBackLeft) {
           bestPose = Constants.driveToPoseConstants.BLUELEFTPOSE2D;
-        } else if(blueDistanceFromCenter < blueDistanceFromRight) {
+        } else if(blueDistanceFromCenter < blueDistanceFromRight && blueDistanceFromCenter < blueDistanceFromBackRight && blueDistanceFromCenter < blueDistanceFromBackLeft) {
           bestPose = Constants.driveToPoseConstants.BLUECENTERPOSE2D;
-        } else {
+        } else if(blueDistanceFromRight < blueDistanceFromBackRight && blueDistanceFromRight < blueDistanceFromBackLeft) {
           bestPose = Constants.driveToPoseConstants.BLUERIGHTPOSE2D;
+        } else if(blueDistanceFromBackRight < blueDistanceFromBackLeft) {
+          bestPose = Constants.driveToPoseConstants.BLUEBACKRIGHTPOSE2D;
+        } else {
+          bestPose = Constants.driveToPoseConstants.BLUEBACKLEFTPOSE2D;
         }
       }
 
       return bestPose;
     }
-
+    
 }
-
