@@ -9,7 +9,11 @@ import java.io.File;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -76,7 +80,23 @@ public class RobotContainer
 
   private void configureDriveToPose() {
 
-    driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
+    // driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
+    if(drivebase.isRedAlliance()) {
+      driverXbox.x().whileTrue(
+        drivebase.driveToPose(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(130))));
+      driverXbox.y().whileTrue(
+        drivebase.driveToPose(new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(180))));
+      driverXbox.b().whileTrue(
+        drivebase.driveToPose(new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(-130))));
+    }else{
+    driverXbox.x().whileTrue(
+      drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(50))));
+    driverXbox.y().whileTrue(
+      drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(0))));
+    driverXbox.b().whileTrue(
+      drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(-50))));
+    }
+
 
 //     if(!drivebase.isRedAlliance()) {
 //         driverXbox.x().whileTrue(drivebase.driveToPose(Constants.driveToPoseConstants.BLUELEFTPOSE2D));
