@@ -796,6 +796,7 @@ public class SwerveSubsystem extends SubsystemBase
         blueDistanceFromRight = Math.sqrt((Math.pow(bRXDist, 2) + Math.pow(bRYDist, 2)));
         blueDistanceFromBackRight = Math.sqrt((Math.pow(bBRXDist, 2) + Math.pow(bBRYDist, 2)));
         blueDistanceFromBackLeft = Math.sqrt((Math.pow(bBLXDist, 2) + Math.pow(bBLYDist, 2)));
+        
         if(blueDistanceFromLeft < blueDistanceFromCenter && blueDistanceFromLeft < blueDistanceFromRight && blueDistanceFromLeft < blueDistanceFromBackRight && blueDistanceFromLeft < blueDistanceFromBackLeft) {
           bestPose = Constants.driveToPoseConstants.BLUELEFTPOSE2D;
         } else if(blueDistanceFromCenter < blueDistanceFromRight && blueDistanceFromCenter < blueDistanceFromBackRight && blueDistanceFromCenter < blueDistanceFromBackLeft) {

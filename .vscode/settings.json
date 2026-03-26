@@ -62,5 +62,6 @@
     "plaintext": true,
     "markdown": true,
     "scminput": true
-  }
+  },
+  "wpilib.selectDefaultSimulateExtension": true
 }
