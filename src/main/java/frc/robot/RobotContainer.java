@@ -18,8 +18,11 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import swervelib.SwerveInputStream;
 
@@ -82,20 +85,70 @@ public class RobotContainer
 
     // driverXbox.y().whileTrue(drivebase.driveToPose(drivebase.getClosestPoint()));
     if(drivebase.isRedAlliance()) {
+        // // Line 1: Define the combined command using alongWith
+        // Command shootLeft = drivebase.driveToPose(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(50)))
+        // .alongWith(ShooterSubsystem.setShooterVelocity(1000));
+
+        // // Line 2: Bind it to a button using whileTrue
+        // driverXbox.button(1).whileTrue(shootLeft);
+
       driverXbox.x().whileTrue(
-        // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1000;
-        drivebase.driveToPose(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(50))));
+          drivebase.driveToPose(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(-50)))
+          .alongWith(Commands.runOnce(() -> {
+              // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1000;
+              SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
+          }))
+      );
       driverXbox.y().whileTrue(
-        drivebase.driveToPose(new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(0))));
+          drivebase.driveToPose(new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(0)))
+          .alongWith(Commands.runOnce(() -> {
+              // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 500;
+              SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
+          }))
+      );
       driverXbox.b().whileTrue(
-        drivebase.driveToPose(new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(-50))));
+          drivebase.driveToPose(new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(50)))
+          .alongWith(Commands.runOnce(() -> {
+              // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 700;
+              SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
+          }))
+      );
+      // driverXbox.x().whileTrue(
+      //   drivebase.driveToPose(new Pose2d(new Translation2d(14, 2), Rotation2d.fromDegrees(-50))));
+      // driverXbox.x().whileTrue(Commands.runOnce(()-> Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1000));
+      // driverXbox.y().whileTrue(
+      //   drivebase.driveToPose(new Pose2d(new Translation2d(14, 4), Rotation2d.fromDegrees(0))));
+      // driverXbox.b().whileTrue(
+        // drivebase.driveToPose(new Pose2d(new Translation2d(14, 6), Rotation2d.fromDegrees(50))));
     }else{
+      // driverXbox.x().whileTrue(
+      //   drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(130))));
+      // driverXbox.y().whileTrue(
+      //     drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(180))));
+      // driverXbox.b().whileTrue(
+      //       drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(-130))));
+
       driverXbox.x().whileTrue(
-        drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(130))));
+          drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 6), Rotation2d.fromDegrees(130)))
+          .alongWith(Commands.runOnce(() -> {
+              // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 1000;
+              SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
+          }))
+      );
       driverXbox.y().whileTrue(
-          drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(180))));
+          drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 4), Rotation2d.fromDegrees(180)))
+          .alongWith(Commands.runOnce(() -> {
+              // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 500;
+              SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
+          }))
+      );
       driverXbox.b().whileTrue(
-            drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(-130))));
+          drivebase.driveToPose(new Pose2d(new Translation2d(2.6, 2), Rotation2d.fromDegrees(-130)))
+          .alongWith(Commands.runOnce(() -> {
+              // Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM = 700;
+              SmartDashboard.putNumber("Shooter Target RPM", Constants.ShooterConstants.SHOOTER_TARGET_VELOCITY_RPM);
+          }))
+      );
     }
 
 

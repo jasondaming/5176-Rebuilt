@@ -16,7 +16,7 @@ import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
     
-    private final SparkFlex shooterLeader = new SparkFlex(Constants.ShooterConstants.LEADERSHOOTERID, MotorType.kBrushless);
+    private static final SparkFlex shooterLeader = new SparkFlex(Constants.ShooterConstants.LEADERSHOOTERID, MotorType.kBrushless);
     private final SparkFlex shooterFollower = new SparkFlex(Constants.ShooterConstants.FOLLOWERSHOOTERID, MotorType.kBrushless);
 
 
@@ -60,7 +60,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     /* This is a method that makes the roller spin at a target velocity */
-    public void setShooterVelocity(double velocityRPM) {
+    public static void setShooterVelocity(double velocityRPM) {
         shooterLeader.getClosedLoopController().setSetpoint(velocityRPM, ControlType.kVelocity);
     }
     
