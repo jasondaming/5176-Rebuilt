@@ -47,7 +47,7 @@ public final class Constants
   public static class ShooterConstants // Keep in mind these values affect 2 motors working together
   {
     // Target Shooter Velocity in RPM - May be removed later if using a function to calculate distance then velocity of the ball
-    public static final double SHOOTER_TARGET_VELOCITY_RPM = 2000.0;//3000
+    public static double SHOOTER_TARGET_VELOCITY_RPM = 2000.0;//3000
 
     // Shooter PID Constants
     public static final double kP = 0.0008;// 0.0004 is a GOOD value for shooting! Needs Tuning - Proportional Gain
