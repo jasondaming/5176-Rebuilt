@@ -24,10 +24,12 @@ public class RebuiltCommands {
     public static final Command stopSpindexer = new InstantCommand(()-> Robot.spindexerSubsystem.runSpindexer(0.0), Robot.spindexerSubsystem);
 
     public static final Command deployIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(Constants.IntakeConstants.kArmRotations) ,Robot.intakeSubsystem);
-    public static final Command retractIntake = new InstantCommand(()-> Robot.intakeSubsystem.deployIntake(Constants.IntakeConstants.kArmRetractPos), Robot.intakeSubsystem);
+    public static final Command retractIntake = new InstantCommand(()-> Robot.intakeSubsystem.retractIntake(Constants.IntakeConstants.kArmRetractPos), Robot.intakeSubsystem);
     
+    public static final Command bottomPos = new InstantCommand(
+        ()-> Robot.towerClimbSubsystem.setTowerClimbPosition(Constants.TowerConstants.CLIMBPOS), Robot.towerClimbSubsystem);
     public static final Command topPos = new InstantCommand(
-        ()-> Robot.towerClimbSubsystem.setTowerClimbPosition(Constants.TowerConstants.CLIMBDISTANCE), Robot.towerClimbSubsystem);
+        ()-> Robot.towerClimbSubsystem.setTowerClimbPosition(Constants.TowerConstants.RESETPOS), Robot.towerClimbSubsystem);
     // public static final Command bottomPos = new InstantCommand(
     //     ()-> Robot.towerClimbSubsystem.setTowerClimbPosition(0), Robot.towerClimbSubsystem);
 
