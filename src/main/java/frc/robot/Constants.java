@@ -148,8 +148,8 @@ public final class Constants
     public static final Translation2d TOWERTRANSLATION = new Translation2d(0,0);
     public static final Rotation2d TOWERROTATION = new Rotation2d(0);
 
-    public static final double CLIMBCONVERSIONFACTOR = 5.2935836213; // DO NOT TOUCH. CALCULATED CONVERSION
-    public static final double CLIMBDISTANCE = -(5 / CLIMBCONVERSIONFACTOR);//inches you want the bike chain to move * conversion factor
+    public static final double CLIMBPOS = -1;
+    public static final double RESETPOS = 0;
 
     // public static final int FLIPPERS_MOTOR_CURRENT_LIMIT = 40;
     // public static final double FLIPPERS_MOTOR_VOLTAGE = 12;
@@ -178,7 +178,7 @@ public final class Constants
 
   public static class DriveToPIDConstants {
     // Translation (X/Y) PID - output is m/s per meter of error
-    public static final double TRANSLATION_KP = 3.0;
+    public static final double TRANSLATION_KP = 1.0;
     public static final double TRANSLATION_KD = 0.0;
     // Rotation PID - output is rad/s per radian of error
     public static final double ROTATION_KP    = 3.0;
