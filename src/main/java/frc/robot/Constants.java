@@ -178,7 +178,7 @@ public final class Constants
 
   public static class DriveToPIDConstants {
     // Translation (X/Y) PID - output is m/s per meter of error
-    public static final double TRANSLATION_KP = 1.0;
+    public static final double TRANSLATION_KP = 2.0;
     public static final double TRANSLATION_KD = 0.0;
     // Rotation PID - output is rad/s per radian of error
     public static final double ROTATION_KP    = 3.0;

@@ -85,10 +85,10 @@ public class SwerveSubsystem extends SubsystemBase
    public SwerveSubsystem(File directory)
   { 
     boolean blueAlliance = DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Blue;
-    Pose2d startingPose = blueAlliance ? new Pose2d(new Translation2d(Meter.of(3.6),
+    Pose2d startingPose = blueAlliance ? new Pose2d(new Translation2d(Meter.of(3),
                                                                       Meter.of(4)),
                                                     Rotation2d.fromDegrees(180))
-                                       : new Pose2d(new Translation2d(Meter.of(13),
+                                       : new Pose2d(new Translation2d(Meter.of(13.5),
                                                                       Meter.of(4)),
                                                     Rotation2d.fromDegrees(0));
     // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary objects being created.

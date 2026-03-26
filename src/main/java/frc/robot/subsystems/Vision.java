@@ -24,6 +24,9 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +36,9 @@ import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
 import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 import org.photonvision.PhotonUtils;
+import org.photonvision.simulation.PhotonCameraSim;
+import org.photonvision.simulation.SimCameraProperties;
+import org.photonvision.simulation.VisionSystemSim;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
 import swervelib.SwerveDrive;
@@ -55,6 +61,11 @@ public class Vision extends SubsystemBase {
    * Ambiguity defined as a value between (0,1). Used in {@link Vision#filterPose}.
    */
   private final       double              maximumAmbiguity                = 0.25;
+  /**
+   * Photon Vision Simulation
+   */
+  public              VisionSystemSim     visionSim;
+
   /**
    * Count of times that the odom thinks we're more than 10meters away from the april tag.
    */
@@ -79,6 +90,18 @@ public class Vision extends SubsystemBase {
   {
     this.currentPose = currentPose;
     this.field2d = field;
+        if (Robot.isSimulation())
+    {
+      visionSim = new VisionSystemSim("Vision");
+      visionSim.addAprilTags(fieldLayout);
+
+      for (Cameras c : Cameras.values())
+      {
+        c.addToVisionSim(visionSim);
+      }
+
+      openSimCameraViews();
+    }
   }
 
   /**
@@ -109,6 +132,17 @@ public class Vision extends SubsystemBase {
    */
   public void updatePoseEstimation(SwerveDrive swerveDrive)
   {
+    if (SwerveDriveTelemetry.isSimulation && swerveDrive.getSimulationDriveTrainPose().isPresent())
+    {
+      /*
+       * In the maple-sim, odometry is simulated using encoder values, accounting for factors like skidding and drifting.
+       * As a result, the odometry may not always be 100% accurate.
+       * However, the vision system should be able to provide a reasonably accurate pose estimation, even when odometry is incorrect.
+       * (This is why teams implement vision system to correct odometry.)
+       * Therefore, we must ensure that the actual robot pose is provided in the simulator when updating the vision simulation during the simulation.
+       */
+      visionSim.update(swerveDrive.getSimulationDriveTrainPose().get());
+    }
     for (Cameras camera : Cameras.values())
     {
       Optional<EstimatedRobotPose> poseEst = getEstimatedGlobalPose(camera);
@@ -135,6 +169,19 @@ public class Vision extends SubsystemBase {
   public Optional<EstimatedRobotPose> getEstimatedGlobalPose(Cameras camera)
   {
     Optional<EstimatedRobotPose> poseEst = camera.getEstimatedGlobalPose();
+    if (Robot.isSimulation())
+    {
+      Field2d debugField = visionSim.getDebugField();
+      // Uncomment to enable outputting of vision targets in sim.
+      poseEst.ifPresentOrElse(
+          est ->
+              debugField
+                  .getObject("VisionEstimation")
+                  .setPose(est.estimatedPose.toPose2d()),
+          () -> {
+            debugField.getObject("VisionEstimation").setPoses();
+          });
+    }
     return poseEst;
   }
 
@@ -176,6 +223,35 @@ public class Vision extends SubsystemBase {
     }
     return target;
 
+  }
+
+  /**
+   * Vision simulation.
+   *
+   * @return Vision Simulation
+   */
+  public VisionSystemSim getVisionSim()
+  {
+    return visionSim;
+  }
+
+  /**
+   * Open up the photon vision camera streams on the localhost, assumes running photon vision on localhost.
+   */
+  private void openSimCameraViews()
+  {
+    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE))
+    {
+     try
+     {
+       Desktop.getDesktop().browse(new URI("http://localhost:1182/"));
+       Desktop.getDesktop().browse(new URI("http://localhost:1184/"));
+      //  Desktop.getDesktop().browse(new URI("http://localhost:1186/"));
+     } catch (IOException | URISyntaxException e)
+     {
+       e.printStackTrace();
+     }
+    }
   }
 
   /**
@@ -291,6 +367,10 @@ public class Vision extends SubsystemBase {
     public        Optional<EstimatedRobotPose> estimatedRobotPose = Optional.empty();
 
     /**
+     * Simulated camera instance which only exists during simulations.
+     */
+    public        PhotonCameraSim              cameraSim;
+    /**
      * Results list to be updated periodically and cached to avoid unnecessary queries.
      */
     public        List<PhotonPipelineResult>   resultsList       = new ArrayList<>();
@@ -326,6 +406,37 @@ public class Vision extends SubsystemBase {
 
       this.singleTagStdDevs = singleTagStdDevs;
       this.multiTagStdDevs = multiTagStdDevsMatrix;
+     
+      if (Robot.isSimulation())
+      {
+        SimCameraProperties cameraProp = new SimCameraProperties();
+        // A 640 x 480 camera with a 100 degree diagonal FOV.
+        cameraProp.setCalibration(960, 720, Rotation2d.fromDegrees(100));
+        // Approximate detection noise with average and standard deviation error in pixels.
+        cameraProp.setCalibError(0.25, 0.08);
+        // Set the camera image capture framerate (Note: this is limited by robot loop rate).
+        cameraProp.setFPS(30);
+        // The average and standard deviation in milliseconds of image data latency.
+        cameraProp.setAvgLatencyMs(35);
+        cameraProp.setLatencyStdDevMs(5);
+
+        cameraSim = new PhotonCameraSim(camera, cameraProp);
+        cameraSim.enableDrawWireframe(true);
+      } 
+    }
+
+    /**
+     * Add camera to {@link VisionSystemSim} for simulated photon vision.
+     *
+     * @param systemSim {@link VisionSystemSim} to use.
+     */
+    public void addToVisionSim(VisionSystemSim systemSim)
+    {
+      if (Robot.isSimulation())
+
+      {
+        systemSim.addCamera(cameraSim, robotToCamTransform);
+      }
     }
 
     /**
