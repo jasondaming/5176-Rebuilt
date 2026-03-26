@@ -85,12 +85,12 @@ public final class Constants
     public static final double kArmA = 0.042;
     public static final double kArmG = 0.60;
 
-    public static final double kArmP = 0.05;
+    public static final double kArmP = 0.065; //was 0.05 - had to up this value in an attempt to increase retracting speed.
     public static final double kArmI = 0;
     public static final double kArmD = 0;
 
     public static final double kArmRotations = -12;
-    public static final double kArmRetractPos = -0.2;
+    public static final double kArmRetractPos = 0; //was -0.2 
 
     public static final int INTAKE_ROLLER_MOTORS_CURRENT_LIMIT = 40; // Amps
     public static final double INTAKE_ROLLER_MOTORS_VOLTAGE = 10.0; // Volts
@@ -130,7 +130,7 @@ public final class Constants
     public static final double kSpindexA = 0.17;
 
 
-    public static final double kSpindexP = 0.00190;
+    public static final double kSpindexP = 0.00170; //was 0.0019 - changed it lower since it's jittering a bit
     public static final double kSpindexI = 0;
     public static final double kSpindexD = 0;
 
